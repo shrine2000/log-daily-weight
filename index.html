@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#007AFF">
+    <meta name="description" content="Track your daily weight and progress towards your fitness goals">
+    <link rel="manifest" href="/manifest.json">
     <title>Weight Loss Tracker</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
@@ -288,6 +291,12 @@
                 </button>
             </div>
         </div>
+    </div>
+
+    <!-- Success Notification -->
+    <div id="success-notification" class="success-notification">
+        <span class="material-symbols-outlined" style="font-size: 20px;">check_circle</span>
+        <span>Weight logged successfully!</span>
     </div>
 
     <!-- Bottom Navigation -->

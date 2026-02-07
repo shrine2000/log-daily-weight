@@ -20,7 +20,34 @@ document.addEventListener('DOMContentLoaded', () => {
     updateInsights();
     updateHistory();
     showPage('dashboard');
+    registerServiceWorker();
 });
+
+// Register Service Worker for PWA
+function registerServiceWorker() {
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then((registration) => {
+                    console.log('ServiceWorker registration successful:', registration.scope);
+                    
+                    // Check for updates
+                    registration.addEventListener('updatefound', () => {
+                        const newWorker = registration.installing;
+                        newWorker.addEventListener('statechange', () => {
+                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                // New service worker available, prompt user to refresh
+                                console.log('New service worker available. Refresh to update.');
+                            }
+                        });
+                    });
+                })
+                .catch((error) => {
+                    console.log('ServiceWorker registration failed:', error);
+                });
+        });
+    }
+}
 
 function setTodayDate() {
     const today = new Date().toISOString().split('T')[0];
@@ -190,7 +217,13 @@ function saveWeightLog() {
     updateInsights();
     updateHistory();
     
-    alert('Weight logged successfully!');
+    // Haptic feedback
+    if (navigator.vibrate) {
+        navigator.vibrate([50, 30, 50]);
+    }
+    
+    // Show subtle success notification
+    showSuccessNotification();
     showPage('dashboard');
 }
 
@@ -652,5 +685,20 @@ function clearAllData() {
         updateHistory();
         alert('All data cleared');
     }
+}
+
+function showSuccessNotification() {
+    const notification = document.getElementById('success-notification');
+    if (!notification) return;
+    
+    // Show notification
+    notification.classList.remove('hide');
+    notification.classList.add('show');
+    
+    // Hide after 2 seconds
+    setTimeout(() => {
+        notification.classList.remove('show');
+        notification.classList.add('hide');
+    }, 2000);
 }
 
