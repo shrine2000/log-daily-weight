@@ -1,10 +1,11 @@
 // Service Worker for Weight Loss Tracker PWA
 const CACHE_NAME = 'weight-tracker-v1';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/css/styles.css',
-  '/js/app.js',
+  './',
+  './index.html',
+  './css/styles.css',
+  './js/app.js',
+  './manifest.json',
   'https://cdn.tailwindcss.com?plugins=forms,container-queries',
   'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap',
   'https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap',
@@ -73,7 +74,7 @@ self.addEventListener('fetch', (event) => {
         }).catch(() => {
           // If fetch fails and it's a navigation request, return offline page
           if (event.request.mode === 'navigate') {
-            return caches.match('/index.html');
+            return caches.match('./index.html');
           }
         });
       })

@@ -2,12 +2,12 @@
   "name": "Weight Loss Tracker",
   "short_name": "Weight Tracker",
   "description": "Track your daily weight and progress towards your fitness goals",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#007AFF",
   "orientation": "portrait",
-  "scope": "/",
+  "scope": "./",
   "icons": [
     {
       "src": "assets/icon-72x72.png",
